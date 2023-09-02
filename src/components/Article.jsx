@@ -27,7 +27,7 @@ function Article() {
                     <Card.Text>
                     {art.price}€
                     </Card.Text>
-                    <Button variant="primary"><Link to={`/consultores/${art.title}`}>{`+ Información`}</Link></Button>
+                    <Button variant="primary"><Link to={`/articles/${art.id}`}>{`+ Información`}</Link></Button>
                     </Card.Body>
                 </div>
             ))}

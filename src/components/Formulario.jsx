@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
 
-function ImageUploadForm() {
+const Formulario = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [base64Image, setBase64Image] = useState(null);
 
   const handleImageChange = (event) => {
-    setSelectedImage(event.target.files[0]);
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBase64Image(reader.result); // Almacena la imagen como Base64
+      };
+      reader.readAsDataURL(file); // Lee el archivo como Base64
+    }
+
+    setSelectedImage(file);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!selectedImage) {
+      console.error('Debes seleccionar una imagen');
+      return;
+    }
+
+    // Ahora puedes usar "base64Image" en lugar del archivo binario seleccionado
 
     const formData = new FormData();
     formData.append('image', selectedImage);
 
-    // Llamar a la función que envía la imagen a la API
-    // Ejemplo: uploadImage(formData);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      <button type="submit">Subir Imagen</button>
-    </form>
-  );
-}
-
-export default ImageUploadForm;
-
-
-const uploadImage = async (formData) => {
     try {
       const response = await fetch('http://localhost:3000/articles', {
         method: 'POST',
         body: formData,
       });
-  
+
       if (response.ok) {
         console.log('Imagen subida exitosamente');
         // Realizar acciones adicionales después de subir la imagen
@@ -42,9 +44,24 @@ const uploadImage = async (formData) => {
         console.error('Error al subir la imagen');
       }
     } catch (error) {
-      console.error('Error de red:', error);
+      console.error('Error al subir la imagen', error);
     }
   };
- 
-  
-  
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+        <button type="submit">Subir Imagen</button>
+      </form>
+      {base64Image && (
+        <div>
+          <p>Imagen seleccionada en Base64:</p>
+          <img src={base64Image} alt="Imagen seleccionada" />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Formulario;

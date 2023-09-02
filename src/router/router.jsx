@@ -5,7 +5,8 @@ import ErrorPages from "../pages/ErrorPage.jsx";
 import ArticleDetails from "../pages/ArticleDetails.jsx";
 
 import App from "../App.jsx";
-import ImageUploadForm from "../components/Formulario.jsx";
+import Formulario from "../components/Formulario.jsx";
+import Clickcounter from "../components/ClickCounter.jsx";
 export const router = createBrowserRouter([
 
     {
@@ -27,7 +28,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/formulario",
-                element: <ImageUploadForm />
+                element: <Formulario />
+            },
+            {
+                path: "/contador",
+                element: <Clickcounter />
             },
             
             

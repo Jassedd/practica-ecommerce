@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Ordenador",
+      "description": "nuevo en su caja, nunca usado",
+      "price": 500,
+      "quantity": 5,
+      "image": "portatil.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Taza",
+      "description": "taza bonita",
+      "price": 30,
+      "quantity": 14,
+      "image": "taza.jpg"
+    }
+  ]
+}
