@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const Formulario = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [base64Image, setBase64Image] = useState(null);
